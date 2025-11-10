@@ -1,26 +1,30 @@
 "use client";
 
+import loginImage from "@/assets/images/login.png";
 import MyButton from "@/components/ui/core/MyButton/MyButton";
 import MyFormInput from "@/components/ui/core/MyForm/MyFormInput/MyFormInput";
 import MyFormWrapper from "@/components/ui/core/MyForm/MyFormWrapper/MyFormWrapper";
-import { Button } from "antd";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import loginImage from "@/assets/images/login.png";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { handleAsyncWithToast } from "@/utils/handleAsyncWithToast";
-import { setUser } from "@/redux/features/auth/authSlice";
-import LoginWithGoogle from "@/components/ui/LoginWithGoogle/LoginWithGoogle";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { z } from "zod";
 
 const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
 
+const adminDefaults = { email: "admin123@gmail.com", password: "123456" };
+const userDefaults = { email: "user123@gmail.com", password: "12345678" };
+
 const LoginPage = () => {
+  const [activeTab, setActiveTab] = useState<"admin" | "user" | null>(null);
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -83,7 +87,7 @@ const LoginPage = () => {
             </div> */}
 
             {/* Sign up / Login Buttons */}
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <Button
                 onClick={() => router.push("/register")}
                 type="default"
@@ -93,6 +97,30 @@ const LoginPage = () => {
                 Sign up
               </Button>
               <MyButton label="Login" fullWidth />
+            </div> */}
+
+            {/* demo admin and demo user auto fill action */}
+            <div className="flex justify-center gap-4 mb-4">
+              <button
+                onClick={() => setActiveTab("admin")}
+                className={`px-4 py-2 w-full rounded-md ${
+                  activeTab === "admin"
+                    ? "bg-core-gradient text-white"
+                    : "bg-gray-200"
+                }`}
+              >
+                Admin
+              </button>
+              <button
+                onClick={() => setActiveTab("user")}
+                className={`px-4 py-2 w-full rounded-md ${
+                  activeTab === "user"
+                    ? "bg-core-gradient text-white"
+                    : "bg-gray-200"
+                }`}
+              >
+                User
+              </button>
             </div>
 
             {/* <h2 className="text-2xl font-bold text-text-primary">
@@ -127,6 +155,13 @@ const LoginPage = () => {
                 name="email"
                 label="Email"
                 placeHolder="Enter your email"
+                value={
+                  activeTab === "admin"
+                    ? adminDefaults?.email
+                    : activeTab === "user"
+                    ? userDefaults?.email
+                    : ""
+                }
                 inputClassName="py-3"
               />
               <MyFormInput
@@ -134,6 +169,13 @@ const LoginPage = () => {
                 name="password"
                 label="Password"
                 placeHolder="Enter your password"
+                value={
+                  activeTab === "admin"
+                    ? adminDefaults?.password
+                    : activeTab === "user"
+                    ? userDefaults?.password
+                    : ""
+                }
                 inputClassName="py-3"
               />
               <div className="flex justify-end">
@@ -146,6 +188,16 @@ const LoginPage = () => {
               </div>
               <MyButton type="submit" label="Login" fullWidth isArrow />
             </MyFormWrapper>
+
+            {/* Additional Action */}
+            <div className="flex items-center justify-center">
+              <p className="text-text-secondary text-sm">
+                Don&apos;t have an account?{" "}
+                <Link href="/register" className="text-primary hover:underline">
+                  Sign up
+                </Link>
+              </p>
+            </div>
           </div>
 
           {/* Right Column - Illustrative Image */}

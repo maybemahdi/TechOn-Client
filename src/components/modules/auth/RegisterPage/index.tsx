@@ -65,7 +65,7 @@ const RegisterPage = () => {
             </div> */}
 
             {/* Sign up / Login Buttons */}
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <MyButton label="Sign up" fullWidth />
               <Button
                 onClick={() => router.push("/login")}
@@ -75,7 +75,7 @@ const RegisterPage = () => {
               >
                 Login
               </Button>
-            </div>
+            </div> */}
 
             {/* <h2 className="text-2xl font-bold text-text-primary">
               Grab Your Offer Today!
@@ -126,6 +126,16 @@ const RegisterPage = () => {
               />
               <MyButton type="submit" label="Let's Start" fullWidth isArrow />
             </MyFormWrapper>
+
+            {/* Additional Action */}
+            <div className="flex items-center justify-center">
+              <p className="text-text-secondary text-sm">
+                Already have an account?{" "}
+                <Link href="/login" className="text-primary hover:underline">
+                  Sign in
+                </Link>
+              </p>
+            </div>
           </div>
 
           {/* Right Column - Illustrative Image */}
