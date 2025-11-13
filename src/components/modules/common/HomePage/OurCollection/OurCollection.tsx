@@ -224,11 +224,11 @@ export default function OurCollection() {
         {!isProductsLoading && !isProductsFetching && products.length > 0 ? (
           <motion.div
             key={selectedCategory}
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="hidden md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            // variants={staggerContainer}
+            // initial="hidden"
+            // whileInView="show"
+            // viewport={{ once: true, amount: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
           >
             {products.map((product: Product) => (
               <motion.div key={product.id} variants={fadeUpItem}>
@@ -238,48 +238,14 @@ export default function OurCollection() {
           </motion.div>
         ) : null}
 
-        {/* Products Grid small screen */}
-        {!isProductsLoading && !isProductsFetching && products.length > 0 ? (
-          <motion.div
-            key={selectedCategory}
-            // variants={staggerContainer}
-            // initial="hidden"
-            // whileInView="show"
-            // viewport={{ once: true, amount: 0.3 }}
-            className="md:hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          >
-            {products.map((product: Product) => (
-              <motion.div key={product.id} variants={fadeUpItem}>
-                <ProductCard product={product} />
-              </motion.div>
-            ))}
-          </motion.div>
-        ) : null}
-
-        {/* Skeletons for big screen */}
-        {(isProductsLoading || isProductsFetching || products.length === 0) && (
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="hidden md:grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          >
-            {Array.from({ length: 5 }).map((_, index) => (
-              <motion.div key={index} variants={fadeUpItem}>
-                <ProductCardSkeleton />
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-        {/* Skeletons for small screen */}
+        {/* Skeletons */}
         {(isProductsLoading || isProductsFetching || products.length === 0) && (
           <motion.div
             // variants={staggerContainer}
             // initial="hidden"
             // whileInView="show"
             // viewport={{ once: true, amount: 0.3 }}
-            className="md:hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
           >
             {Array.from({ length: 5 }).map((_, index) => (
               <motion.div key={index} variants={fadeUpItem}>
