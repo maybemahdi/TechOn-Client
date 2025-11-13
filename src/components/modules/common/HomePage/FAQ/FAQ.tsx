@@ -10,7 +10,6 @@ interface FAQItem {
   answer: string;
 }
 
-
 const faqData: FAQItem[] = [
   {
     id: 1,
@@ -44,7 +43,8 @@ const faqData: FAQItem[] = [
   },
   {
     id: 6,
-    question: "I’m a tourist or visitor — can I order while I’m in Cayman and have it delivered to my hotel or rental?",
+    question:
+      "I’m a tourist or visitor — can I order while I’m in Cayman and have it delivered to my hotel or rental?",
     answer:
       "Absolutely! Whether you’re here for a few days or a few months, you can shop just like a local. We deliver to hotels, resorts, Airbnbs, and vacation rentals anywhere in the Cayman Islands.",
   },
@@ -84,7 +84,7 @@ export default function FAQ() {
 
         {/* FAQ Items */}
         <motion.div
-          className="max-w-[80%] mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
+          className="max-w-[100%] md:max-w-[80%] mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}

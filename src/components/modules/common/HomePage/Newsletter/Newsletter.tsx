@@ -27,7 +27,7 @@ export default function Newsletter() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <div className="max-w-[80%] mx-auto p-8 md:p-12 text-center">
+        <div className="max-w-[100%] md:max-w-[80%] mx-auto md:p-12 text-center">
           <motion.h2
             className="text-2xl md:text-3xl font-bold text-gray-900 mb-4"
             initial={{ opacity: 0, y: 20 }}
@@ -45,7 +45,8 @@ export default function Newsletter() {
             transition={{ delay: 0.3, duration: 0.5 }}
             viewport={{ once: true }}
           >
-            Subscribe to get early access to new Deals, creative ideas, and insider updates.
+            Subscribe to get early access to new Deals, creative ideas, and
+            insider updates.
           </motion.p>
 
           <motion.p

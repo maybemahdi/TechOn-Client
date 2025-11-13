@@ -41,7 +41,6 @@ const CheckoutPage: React.FC = () => {
   const router = useRouter();
 
   console.log(buyNowProduct);
-  
 
   const cartProducts = useAppSelector(orderedProductsSelector);
   const subTotal = useAppSelector(subTotalSelector);
@@ -62,40 +61,49 @@ const CheckoutPage: React.FC = () => {
 
   const [form] = Form.useForm();
 
-const orderColumns: ColumnsType<OrderItem> = [
-  {
-    title: "Product",
-    dataIndex: "product",
-    key: "product",
-    render: (text, record) => (
-      <div>
-        <p className="font-medium">{text}</p>
-        {/* Show color and storage if available */}
-        {(record.color || record.storage) && (
-          <p className="text-gray-500 text-xs">
-            {record.color && <span><span className="font-semibold">Color:</span> {record?.color || "-"}</span>}
-            <br />
-            {/* {record.color && record.storage && <span> | </span>} */}
-            {record.storage && <span><span className="font-semibold">Variant:</span> {record?.storage || "-"}</span>}
-          </p>
-        )}
-      </div>
-    ),
-  },
-  {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity",
-    align: "center",
-  },
-  {
-    title: "Price",
-    dataIndex: "price",
-    key: "price",
-    align: "right",
-  },
-];
-
+  const orderColumns: ColumnsType<OrderItem> = [
+    {
+      title: "Product",
+      dataIndex: "product",
+      key: "product",
+      render: (text, record) => (
+        <div>
+          <p className="font-medium">{text}</p>
+          {/* Show color and storage if available */}
+          {(record.color || record.storage) && (
+            <p className="text-gray-500 text-xs">
+              {record.color && (
+                <span>
+                  <span className="font-semibold">Color:</span>{" "}
+                  {record?.color || "-"}
+                </span>
+              )}
+              <br />
+              {/* {record.color && record.storage && <span> | </span>} */}
+              {record.storage && (
+                <span>
+                  <span className="font-semibold">Variant:</span>{" "}
+                  {record?.storage || "-"}
+                </span>
+              )}
+            </p>
+          )}
+        </div>
+      ),
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
+      align: "center",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      align: "right",
+    },
+  ];
 
   // const orderData: OrderItem[] = [
   //   {
@@ -124,8 +132,8 @@ const orderColumns: ColumnsType<OrderItem> = [
       {
         key: "1",
         product: buyNowProduct.name,
-        color : buyNowProduct.selectedColor || "N/A",
-        storage : buyNowProduct.selectedStorage || "N/A",
+        color: buyNowProduct.selectedColor || "N/A",
+        storage: buyNowProduct.selectedStorage || "N/A",
         quantity: 1,
         price: `${currency} ${convertPrice(
           Number(buyNowProduct?.price),
@@ -187,7 +195,7 @@ const orderColumns: ColumnsType<OrderItem> = [
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Order created successfully!",
+          text: "Thank you for your order! Our team will be in touch shortly to coordinate your delivery.",
         }).then(() => {
           window.location.href = `/user/orders`;
         });
@@ -229,7 +237,7 @@ const orderColumns: ColumnsType<OrderItem> = [
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Order created successfully!",
+          text: "Thank you for your order! Our team will be in touch shortly to coordinate your delivery.",
         }).then(() => {
           window.location.href = `/user/orders`;
         });
@@ -471,6 +479,10 @@ const orderColumns: ColumnsType<OrderItem> = [
                   </Checkbox>
                 </Form.Item>
               </Form>
+              <p>
+                Once your order is placed, we'll be in touch to arrange your
+                delivery.
+              </p>
               <Form form={form} onFinish={onFinish}>
                 <MyButton type="submit" label="Place Order" fullWidth />
               </Form>
